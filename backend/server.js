@@ -5,8 +5,10 @@ import { connectDB } from "./config/db.js";
 import Product from "./models/product.js";
 
 dotenv.config();
-
 const app = express();
+app.use(express.json());
+
+connectDB();
 
 const uri = process.env.MONGO_URI;
 
@@ -15,7 +17,7 @@ app.get("/", (req, res) => {
 });
 
 // Route to add product
-app.post("/products", async (req, res) => {
+app.post("/api/products", async (req, res) => {
   const product = req.body;
 
   if (!product.name || !product.price || !product.image) {
