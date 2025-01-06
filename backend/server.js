@@ -4,12 +4,17 @@ import { connectDB } from "./config/db.js";
 import productRoutes from "./routes/product.routes.js";
 
 dotenv.config();
+
 const app = express();
 app.use(express.json());
 
-app.use("api/products", productRoutes);
-const uri = process.env.MONGO_URI;
+console.log("Connecting to:", process.env.MONGO_URI);
+// const uri = process.env.MONGO_URI;
 
+// Routes
+app.use("/api/products", productRoutes);
+
+// Default route
 app.get("/", (req, res) => {
   res.send("Welcome to the API");
 });
